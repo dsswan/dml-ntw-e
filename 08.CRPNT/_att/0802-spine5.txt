@@ -1,0 +1,120 @@
+
+!
+! Last configuration change at 15:31:35 UTC Tue Aug 27 2024
+!
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname spine5
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ no shutdown
+ ip address 5.5.5.5 255.255.255.255
+!
+interface Ethernet0/0
+ no shutdown
+ ip address 192.168.5.7 255.255.255.254
+!
+interface Ethernet0/1
+ no shutdown
+ ip address 192.168.5.5 255.255.255.254
+!
+interface Ethernet0/2
+ no shutdown
+ ip address 192.168.5.3 255.255.255.254
+!
+interface Ethernet0/3
+ no shutdown
+ ip address 192.168.5.1 255.255.255.254
+!
+router bgp 65000
+ bgp router-id 5.5.5.5
+ bgp log-neighbor-changes
+ neighbor 192.168.5.0 remote-as 65001
+ neighbor 192.168.5.2 remote-as 65002
+ neighbor 192.168.5.4 remote-as 65003
+ neighbor 192.168.5.6 remote-as 65004
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+ transport input none
+!
+!
+end
+

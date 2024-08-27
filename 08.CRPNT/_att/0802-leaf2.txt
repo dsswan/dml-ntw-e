@@ -1,0 +1,141 @@
+
+!
+! Last configuration change at 15:42:11 UTC Tue Aug 27 2024
+!
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname leaf2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ no shutdown
+ ip address 2.2.2.2 255.255.255.255
+!
+interface Ethernet0/0
+ no shutdown
+ ip address 192.168.6.2 255.255.255.254
+!
+interface Ethernet0/1
+ no shutdown
+ ip address 192.168.5.2 255.255.255.254
+!
+interface Ethernet0/2
+ no shutdown
+ no ip address
+ shutdown
+!
+interface Ethernet0/3
+ no shutdown
+ no ip address
+ shutdown
+!
+router bgp 65002
+ bgp router-id 2.2.2.2
+ bgp log-neighbor-changes
+ redistribute connected route-map underlay_import
+ neighbor 192.168.5.3 remote-as 65000
+ neighbor 192.168.5.3 route-map from_spine in
+ neighbor 192.168.5.3 route-map to_spine out
+ neighbor 192.168.6.3 remote-as 65000
+ neighbor 192.168.6.3 route-map from_spine in
+ neighbor 192.168.6.3 route-map to_spine out
+ maximum-paths 2
+!
+ip forward-protocol nd
+!
+ip bgp-community new-format
+ip community-list standard to_spine permit 65535:100
+!
+no ip http server
+no ip http secure-server
+!
+!
+ip prefix-list underlay_import seq 5 permit 0.0.0.0/0 le 30
+!
+route-map to_spine deny 10
+ match community to_spine
+!
+route-map to_spine permit 20
+!
+route-map from_spine permit 10
+ set community 65535:100 additive
+!
+route-map underlay_import permit 10
+ match ip address prefix-list underlay_import
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+ transport input none
+!
+!
+end
+
