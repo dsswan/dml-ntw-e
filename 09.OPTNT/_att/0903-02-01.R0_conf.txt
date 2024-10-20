@@ -1,0 +1,110 @@
+R0(config)#do sh run
+Building configuration...
+
+Current configuration : 1295 bytes
+!
+version 15.1
+service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname R0
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+flow exporter NETFLOW-E
+ destination 192.168.204.100
+ source GigabitEthernet0/0
+ transport udp 9996
+!
+flow record NETFLOW-R
+ match ipv4 source address
+ match ipv4 destination address
+ match ipv4 protocol
+ match transport source-port
+ match transport destination-port
+ match ipv4 tos
+ collect interface input
+ collect interface output
+ collect transport tcp flags
+ collect routing next-hop address ipv6
+!
+flow monitor NETFLOW-M
+ record NETFLOW-R
+ exporter NETFLOW-E
+!
+license udi pid CISCO2911/K9 sn FTX15247YZJ-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ ip flow monitor NETFLOW-M output
+ ip flow monitor NETFLOW-M input
+ ip address 192.168.204.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 192.168.213.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+logging trap debugging
+logging 192.168.204.100
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
