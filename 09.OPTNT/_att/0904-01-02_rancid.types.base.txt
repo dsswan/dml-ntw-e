@@ -1,0 +1,14 @@
+# RANCiD base device type configuration.
+#
+# DO NOT alter the base device types, they WILL be over-written by future RANCiD
+# release installations.  Customize them by creating clones in rancid.types.conf
+# with a different type name.  If you override existing types, it will be harder
+# to provide support to you and I will make a voodoo doll in your likeness.
+#
+#ios;alias;cisco
+cisco;script;rancid -t cisco
+cisco;login;clogin
+cisco;module;ios
+cisco;inloop;ios::inloop
+cisco;command;ios::WriteTerm;show startup-config
+
