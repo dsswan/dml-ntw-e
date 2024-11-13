@@ -1,0 +1,124 @@
+NAT21#sh run
+Building configuration...
+
+Current configuration : 1959 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname NAT21
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO2901/K9 sn FTX1524FY90-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Tunnel3
+ ip address 100.0.0.2 255.255.255.252
+ mtu 1476
+ tunnel source GigabitEthernet0/0
+ tunnel destination 1.0.0.2
+!
+!
+interface Tunnel4
+ ip address 100.0.1.2 255.255.255.252
+ mtu 1476
+ tunnel source GigabitEthernet0/0
+ tunnel destination 1.0.1.2
+!
+!
+interface GigabitEthernet0/0
+ ip address 1.0.2.2 255.255.255.252
+ ip nat outside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ no ip address
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.0
+ ip access-group 120 in
+ ip nat inside
+!
+interface GigabitEthernet0/1.21
+ encapsulation dot1Q 21
+ ip address 192.168.21.1 255.255.255.0
+ ip access-group 121 in
+ ip nat inside
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router eigrp 100
+ redistribute static 
+ network 192.168.20.0
+ network 192.168.21.0
+ network 100.0.0.0 0.0.0.3
+ network 100.0.1.0 0.0.0.3
+!
+ip nat inside source list 10 interface GigabitEthernet0/0 overload
+ip classless
+ip route 0.0.0.0 0.0.0.0 1.0.2.1 
+!
+ip flow-export version 9
+!
+!
+access-list 10 permit 192.168.20.0 0.0.0.255
+access-list 10 permit 192.168.21.0 0.0.0.255
+access-list 120 permit ip 192.168.20.0 0.0.0.255 3.0.0.0 0.0.0.255
+access-list 120 permit ip 192.168.20.0 0.0.0.255 192.168.10.0 0.0.0.255
+access-list 120 permit ip 192.168.20.0 0.0.0.255 192.168.100.0 0.0.0.255
+access-list 120 deny ip 192.168.20.0 0.0.0.255 any
+access-list 121 permit ip 192.168.21.0 0.0.0.255 3.0.0.0 0.0.0.255
+access-list 121 permit ip 192.168.21.0 0.0.0.255 192.168.100.0 0.0.0.255
+access-list 121 deny ip 192.168.21.0 0.0.0.255 any
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
