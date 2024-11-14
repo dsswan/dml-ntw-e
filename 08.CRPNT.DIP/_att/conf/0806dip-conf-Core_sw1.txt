@@ -1,7 +1,7 @@
 CSW1#sh run
 Building configuration...
 
-Current configuration : 4775 bytes
+Current configuration : 4924 bytes
 !
 version 16.3.2
 no service timestamps log datetime msec
@@ -27,7 +27,7 @@ no ipv6 cef
 !
 !
 !
-!
+!Ы
 !
 !
 !
@@ -35,7 +35,7 @@ no ipv6 cef
 !
 !
 spanning-tree mode rapid-pvst
-spanning-tree vlan 10-13,20-21,100-101 priority 4096
+spanning-tree vlan 10-13,100-101 priority 4096
 !
 !
 !
@@ -111,6 +111,7 @@ interface GigabitEthernet1/0/24
  channel-group 1 mode active
 !
 interface GigabitEthernet1/1/1
+ bandwidth 10000
  no switchport
  ip address 10.1.2.2 255.255.255.252
 !
@@ -179,14 +180,9 @@ interface Vlan101
  standby 101 preempt
 !
 router eigrp 100
+ redistribute connected 
  network 10.1.1.0 0.0.0.3
  network 10.1.2.0 0.0.0.3
- network 192.168.10.0
- network 192.168.11.0
- network 192.168.12.0
- network 192.168.13.0
- network 192.168.100.0
- network 192.168.101.0
  auto-summary
 !
 ip classless
@@ -195,26 +191,32 @@ ip flow-export version 9
 !
 !
 access-list 110 permit eigrp any any
+access-list 110 permit udp any any eq 1985
 access-list 110 permit ip 192.168.10.0 0.0.0.255 3.0.0.0 0.0.0.255
 access-list 110 permit ip 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255
 access-list 110 permit ip 192.168.10.0 0.0.0.255 192.168.100.0 0.0.0.255
 access-list 110 deny ip 192.168.10.0 0.0.0.255 any
 access-list 111 permit eigrp any any
+access-list 111 permit udp any any eq 1985
 access-list 111 permit ip 192.168.11.0 0.0.0.255 3.0.0.0 0.0.0.255
 access-list 111 permit ip 192.168.11.0 0.0.0.255 192.168.100.0 0.0.0.255
 access-list 111 deny ip 192.168.11.0 0.0.0.255 any
 access-list 112 permit eigrp any any
+access-list 112 permit udp any any eq 1985
 access-list 112 permit ip 192.168.12.0 0.0.0.255 3.0.0.0 0.0.0.255
 access-list 112 permit ip 192.168.12.0 0.0.0.255 192.168.100.0 0.0.0.255
 access-list 112 deny ip 192.168.12.0 0.0.0.255 any
 access-list 113 permit eigrp any any
+access-list 113 permit udp any any eq 1985
 access-list 113 permit ip 192.168.13.0 0.0.0.255 3.0.0.0 0.0.0.255
 access-list 113 permit ip 192.168.13.0 0.0.0.255 192.168.100.0 0.0.0.255
 access-list 113 deny ip 192.168.13.0 0.0.0.255 any
 access-list 100 permit eigrp any any
+access-list 100 permit udp any any eq 1985
 access-list 100 permit ip 192.168.100.0 0.0.0.255 192.168.0.0 0.0.255.255
 access-list 100 deny ip 192.168.100.0 0.0.0.255 any
 access-list 101 permit eigrp any any
+access-list 101 permit udp any any eq 1985
 access-list 101 permit ip 192.168.101.0 0.0.0.255 3.0.0.0 0.0.0.255
 access-list 101 deny ip 192.168.101.0 0.0.0.255 any
 !
@@ -233,4 +235,3 @@ line vty 0 4
 !
 !
 end
-

@@ -1,7 +1,7 @@
 NAT2#sh run
 Building configuration...
 
-Current configuration : 1307 bytes
+Current configuration : 1207 bytes
 !
 version 15.1
 no service timestamps log datetime msec
@@ -38,10 +38,6 @@ license udi pid CISCO2901/K9 sn FTX1524AP38-
 spanning-tree mode pvst
 !
 !
-policy-map SHAPE10
- class class-default
-  shape average 10000000
-!
 !
 !
 !
@@ -57,9 +53,8 @@ interface GigabitEthernet0/0
  bandwidth 10000
  ip address 1.0.1.2 255.255.255.252
  ip nat outside
- service-policy output SHAPE10
- duplex auto
- speed auto
+ duplex half
+ speed 10
 !
 interface GigabitEthernet0/1
  bandwidth 10000
