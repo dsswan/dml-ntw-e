@@ -1,0 +1,133 @@
+remote-router(config)#do sh run
+Building configuration...
+
+Current configuration : 2047 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname remote-router
+!
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO1941/K9 sn FTX1524LK1K-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Tunnel1
+ ip address 10.30.1.2 255.255.255.252
+ mtu 1476
+ tunnel source GigabitEthernet0/0
+ tunnel destination 172.1.0.2
+!
+!
+interface Tunnel2
+ ip address 10.30.2.2 255.255.255.252
+ mtu 1476
+ tunnel source GigabitEthernet0/0
+ tunnel destination 172.2.0.2
+!
+!
+interface GigabitEthernet0/0
+ ip address 172.3.0.2 255.255.255.252
+ ip access-group 10 in
+ ip nat outside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ no ip address
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1.101
+ description mgmt2
+ encapsulation dot1Q 101
+ ip address 192.168.11.1 255.255.255.192
+!
+interface GigabitEthernet0/1.201
+ description user
+ encapsulation dot1Q 201
+ ip address 192.168.21.1 255.255.255.128
+!
+interface GigabitEthernet0/1.401
+ description voip
+ encapsulation dot1Q 401
+ ip address 192.168.41.1 255.255.255.192
+!
+interface GigabitEthernet0/1.501
+ description printer
+ encapsulation dot1Q 501
+ ip address 192.168.51.1 255.255.255.192
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ router-id 192.168.11.1
+ log-adjacency-changes
+ passive-interface GigabitEthernet0/1.101
+ passive-interface GigabitEthernet0/1.201
+ passive-interface GigabitEthernet0/1.401
+ passive-interface GigabitEthernet0/1.501
+ network 192.168.11.0 0.0.0.63 area 2
+ network 192.168.21.0 0.0.0.127 area 2
+ network 192.168.41.0 0.0.0.63 area 2
+ network 192.168.51.0 0.0.0.63 area 2
+ network 10.30.1.0 0.0.0.3 area 2
+ network 10.30.2.0 0.0.0.3 area 2
+!
+ip classless
+ip route 172.1.0.0 255.255.255.252 172.3.0.1 
+ip route 172.2.0.0 255.255.255.252 172.3.0.1 
+!
+ip flow-export version 9
+!
+!
+access-list 10 permit 172.1.0.0 0.0.0.3
+access-list 10 permit 172.2.0.0 0.0.0.3
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end

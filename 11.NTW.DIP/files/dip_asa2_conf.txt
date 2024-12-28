@@ -1,0 +1,98 @@
+asa2#sh run
+: Saved
+:
+ASA Version 9.6(1)
+!
+hostname asa2
+names
+!
+interface GigabitEthernet1/1
+ description to_border
+ nameif outside
+ security-level 0
+ ip address 10.12.2.1 255.255.255.252
+!
+interface GigabitEthernet1/2
+ description to_core
+ nameif inside
+ security-level 100
+ ip address 10.2.2.1 255.255.255.252
+!
+interface GigabitEthernet1/3
+ description dmz
+ nameif dmz
+ security-level 50
+ ip address 192.168.0.1 255.255.255.192
+!
+interface GigabitEthernet1/4
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/5
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/6
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/7
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/8
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface Management1/1
+ management-only
+ nameif mgmt
+ security-level 100
+ ip address 192.168.10.22 255.255.255.255
+!
+!
+!
+!
+!
+!
+!
+class-map my_inspection_default
+ match default-inspection-traffic
+!
+policy-map type inspect dns preset_dns_map
+ parameters
+  message-length maximum 512
+policy-map my_global_policy
+ class my_inspection_default
+  inspect dns preset_dns_map
+  inspect ftp 
+  inspect http 
+  inspect icmp 
+  inspect tftp 
+!
+service-policy my_global_policy global
+!
+telnet timeout 5
+ssh timeout 5
+!
+!
+!
+!
+router ospf 1
+ router-id 192.168.10.22
+ log-adjacency-changes
+ network 10.12.2.0 255.255.255.252 area 1
+ network 10.2.2.0 255.255.255.252 area 1
+ network 192.168.0.0 255.255.255.192 area 1
+!
+asa2#

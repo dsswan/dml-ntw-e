@@ -1,0 +1,113 @@
+brdr2(config)#do sh run
+Building configuration...
+
+Current configuration : 1438 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname brdr2
+!
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO1941/K9 sn FTX15246Y51-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description mgmt
+ ip address 192.168.10.12 255.255.255.255
+!
+interface Tunnel2
+ ip address 10.30.2.1 255.255.255.252
+ mtu 1476
+ tunnel source GigabitEthernet0/0
+ tunnel destination 172.3.0.2
+!
+!
+interface GigabitEthernet0/0
+ ip address 172.2.0.2 255.255.255.252
+ ip nat outside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ description to_asa
+ ip address 10.12.2.2 255.255.255.252
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/0
+ description to_brdr
+ ip address 10.20.0.2 255.255.255.252
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ router-id 192.168.10.12
+ log-adjacency-changes
+ network 10.20.0.0 0.0.0.3 area 0
+ network 10.12.2.0 0.0.0.3 area 1
+ network 10.30.2.0 0.0.0.3 area 2
+ default-information originate
+!
+router bgp 65200
+ bgp log-neighbor-changes
+ no synchronization
+ neighbor 172.2.0.1 remote-as 65100
+!
+ip nat inside source list 10 interface GigabitEthernet0/0 overload
+ip classless
+ip route 0.0.0.0 0.0.0.0 Null0 
+!
+ip flow-export version 9
+!
+!
+access-list 10 permit 192.168.0.0 0.0.255.255
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+

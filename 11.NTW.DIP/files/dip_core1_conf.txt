@@ -1,0 +1,202 @@
+core1#sh run
+Building configuration...
+
+Current configuration : 3439 bytes
+!
+version 12.2(37)SE1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname core1
+!
+!
+!
+!
+!
+!
+ip routing
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree vlan 100,200,300,400,500 priority 4096
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+ switchport trunk allowed vlan 100,200,300,400,500
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/1
+ switchport trunk allowed vlan 100,200,300,400,500
+ switchport trunk encapsulation dot1q
+!
+interface FastEthernet0/2
+ switchport trunk allowed vlan 100,200,300,400,500
+ switchport trunk encapsulation dot1q
+!
+interface FastEthernet0/3
+ switchport trunk allowed vlan 100,200,300,400,500
+ switchport trunk encapsulation dot1q
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+ switchport trunk allowed vlan 100,200,300,400,500
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface FastEthernet0/24
+ switchport trunk allowed vlan 100,200,300,400,500
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface GigabitEthernet0/1
+ no switchport
+ ip address 10.1.1.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan100
+ description mgmt
+ mac-address 0002.4a22.7701
+ ip address 192.168.10.2 255.255.255.128
+ standby version 2
+ standby 100 ip 192.168.10.1
+ standby 100 priority 110
+ standby 100 preempt
+ standby 100 track GigabitEthernet0/1
+!
+interface Vlan200
+ description user
+ mac-address 0002.4a22.7702
+ ip address 192.168.20.2 255.255.255.0
+ ip helper-address 192.168.10.5
+ standby version 2
+ standby 200 ip 192.168.20.1
+ standby 200 priority 110
+ standby 200 preempt
+ standby 200 track GigabitEthernet0/1
+!
+interface Vlan300
+ description wlan
+ mac-address 0002.4a22.7703
+ ip address 192.168.30.2 255.255.255.0
+ ip helper-address 192.168.10.5
+ standby version 2
+ standby 300 ip 192.168.30.1
+ standby 300 priority 110
+ standby 300 preempt
+ standby 300 track GigabitEthernet0/1
+!
+interface Vlan400
+ description voip
+ mac-address 0002.4a22.7704
+ ip address 192.168.40.2 255.255.255.0
+ ip helper-address 192.168.10.5
+ standby version 2
+ standby 400 ip 192.168.40.1
+ standby 400 priority 110
+ standby 400 preempt
+ standby 400 track GigabitEthernet0/1
+!
+interface Vlan500
+ description printer
+ mac-address 0002.4a22.7705
+ ip address 192.168.50.2 255.255.255.128
+ ip helper-address 192.168.10.5
+ standby version 2
+ standby 500 ip 192.168.50.1
+ standby 500 priority 110
+ standby 500 preempt
+ standby 500 track GigabitEthernet0/1
+!
+router ospf 1
+ router-id 192.168.10.2
+ log-adjacency-changes
+ redistribute connected metric-type 1 subnets 
+ network 10.1.1.0 0.0.0.3 area 1
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+!
+end

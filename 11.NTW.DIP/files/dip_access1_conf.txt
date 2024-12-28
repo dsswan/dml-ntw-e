@@ -1,0 +1,92 @@
+access1#sh run
+Building configuration...
+
+Current configuration : 6962 bytes
+!
+version 15.0
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname access1
+!
+!
+!
+!
+!
+ip dhcp snooping vlan 100,200,300,400,500
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+spanning-tree vlan 100,200,300,400,500 priority 16384
+!
+interface FastEthernet0/1
+ switchport access vlan 200
+ switchport mode access
+ switchport voice vlan 400
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 0007.EC56.6E81
+ switchport port-security mac-address sticky 00D0.9746.65E4
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/2
+ switchport trunk native vlan 100
+ switchport trunk allowed vlan 100,300
+ ip dhcp snooping trust
+ switchport mode trunk
+!
+interface FastEthernet0/3
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+===
+interface FastEthernet0/23
+ switchport trunk allowed vlan 100,200,300,400,500
+ ip dhcp snooping trust
+ switchport mode trunk
+ spanning-tree portfast trunk
+!
+interface FastEthernet0/24
+ switchport trunk allowed vlan 100,200,300,400,500
+ ip dhcp snooping trust
+ switchport mode trunk
+ spanning-tree portfast trunk
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan100
+ description mgmt
+ ip address 192.168.10.31 255.255.255.128
+!
+ip default-gateway 192.168.10.1
+!
+!
+!
+!
+line con 0
+!
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+!
+!
+!
+end
