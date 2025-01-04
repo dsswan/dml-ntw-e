@@ -1,7 +1,7 @@
-remote-sw#sh run
+remote-sw(config)#do sh run
 Building configuration...
 
-Current configuration : 1409 bytes
+Current configuration : 1942 bytes
 !
 version 15.0
 no service timestamps log datetime msec
@@ -17,15 +17,29 @@ hostname remote-sw
 !
 spanning-tree mode rapid-pvst
 spanning-tree extend system-id
+spanning-tree vlan 101,201,301,401,501 priority 16384
 !
 interface FastEthernet0/1
  switchport access vlan 201
  switchport mode access
  switchport voice vlan 401
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
 !
 interface FastEthernet0/2
- switchport trunk native vlan 101
- switchport mode trunk
+ switchport access vlan 301
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 00E0.A30E.8701
+ spanning-tree portfast
+ spanning-tree bpduguard enable
 !
 interface FastEthernet0/3
 !
@@ -72,7 +86,7 @@ interface FastEthernet0/23
 interface FastEthernet0/24
 !
 interface GigabitEthernet0/1
- switchport trunk allowed vlan 101,201,401,501
+ switchport trunk allowed vlan 101,201,301,401,501
  switchport mode trunk
 !
 interface GigabitEthernet0/2
@@ -101,3 +115,6 @@ line vty 5 15
 !
 !
 end
+
+
+remote-sw(config)#

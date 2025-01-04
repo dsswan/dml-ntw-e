@@ -1,7 +1,7 @@
-access-srv#sh run
+access-srv(config)#do sh run
 Building configuration...
 
-Current configuration : 2180 bytes
+Current configuration : 2356 bytes
 !
 version 15.0
 no service timestamps log datetime msec
@@ -32,17 +32,77 @@ interface FastEthernet0/1
  spanning-tree bpduguard enable
 !
 interface FastEthernet0/2
- switchport trunk native vlan 100
- switchport trunk allowed vlan 100,300
- ip dhcp snooping trust
- switchport mode trunk
+ switchport access vlan 300
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
 !
 interface FastEthernet0/3
  switchport trunk allowed vlan 100,400
  ip dhcp snooping trust
  switchport mode trunk
 !
-===
+interface FastEthernet0/4
+ shutdown
+!
+interface FastEthernet0/5
+ shutdown
+!
+interface FastEthernet0/6
+ shutdown
+!
+interface FastEthernet0/7
+ shutdown
+!
+interface FastEthernet0/8
+ shutdown
+!
+interface FastEthernet0/9
+ shutdown
+!
+interface FastEthernet0/10
+ shutdown
+!
+interface FastEthernet0/11
+ shutdown
+!
+interface FastEthernet0/12
+ shutdown
+!
+interface FastEthernet0/13
+ shutdown
+!
+interface FastEthernet0/14
+ shutdown
+!
+interface FastEthernet0/15
+ shutdown
+!
+interface FastEthernet0/16
+ shutdown
+!
+interface FastEthernet0/17
+ shutdown
+!
+interface FastEthernet0/18
+ shutdown
+!
+interface FastEthernet0/19
+ shutdown
+!
+interface FastEthernet0/20
+ shutdown
+!
+interface FastEthernet0/21
+ shutdown
+!
+interface FastEthernet0/22
+ shutdown
+!
 interface FastEthernet0/23
  switchport trunk allowed vlan 100,200,300,400,500
  ip dhcp snooping trust
@@ -81,3 +141,6 @@ line vty 5 15
 !
 !
 end
+
+
+access-srv(config)#

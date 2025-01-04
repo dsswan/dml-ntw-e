@@ -8,13 +8,13 @@ names
 !
 interface GigabitEthernet1/1
  description to_border
- nameif outside
+ nameif OUTSIDE
  security-level 0
  ip address 10.11.1.1 255.255.255.252
 !
 interface GigabitEthernet1/2
  description to_core
- nameif inside
+ nameif INSIDE
  security-level 100
  ip address 10.1.1.1 255.255.255.252
 !
@@ -62,8 +62,12 @@ interface Management1/1
 !
 !
 !
+access-list INSIDE extended permit ip any any
+access-list OUTSIDE extended permit ip any any
 !
 !
+access-group INSIDE in interface INSIDE
+access-group OUTSIDE in interface OUTSIDE
 !
 !
 class-map my_inspection_default
@@ -91,7 +95,9 @@ ssh timeout 5
 router ospf 1
  router-id 192.168.10.21
  log-adjacency-changes
+ area 1 nssa no-summary
  network 10.11.1.0 255.255.255.252 area 1
  network 10.1.1.0 255.255.255.252 area 1
+ network 192.168.10.0 255.255.255.128 area 1
 !
 asa1#

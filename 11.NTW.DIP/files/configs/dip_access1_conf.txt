@@ -1,7 +1,7 @@
-access1#sh run
+access1(config)#do sh run
 Building configuration...
 
-Current configuration : 6962 bytes
+Current configuration : 7164 bytes
 !
 version 15.0
 no service timestamps log datetime msec
@@ -34,10 +34,15 @@ interface FastEthernet0/1
  spanning-tree bpduguard enable
 !
 interface FastEthernet0/2
- switchport trunk native vlan 100
- switchport trunk allowed vlan 100,300
- ip dhcp snooping trust
- switchport mode trunk
+ switchport access vlan 300
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ switchport port-security mac-address sticky 000A.411C.5701
+ spanning-tree portfast
+ spanning-tree bpduguard enable
 !
 interface FastEthernet0/3
  switchport mode access
@@ -49,7 +54,196 @@ interface FastEthernet0/3
  spanning-tree bpduguard enable
  shutdown
 !
-===
+interface FastEthernet0/4
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/5
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/6
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/7
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/8
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/9
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/10
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/11
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/12
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/13
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/14
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/15
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/16
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/17
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/18
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/19
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/20
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/21
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/22
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
 interface FastEthernet0/23
  switchport trunk allowed vlan 100,200,300,400,500
  ip dhcp snooping trust
@@ -90,3 +284,6 @@ line vty 5 15
 !
 !
 end
+
+
+access1(config)#

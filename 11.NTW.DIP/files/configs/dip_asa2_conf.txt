@@ -8,19 +8,19 @@ names
 !
 interface GigabitEthernet1/1
  description to_border
- nameif outside
+ nameif OUTSIDE
  security-level 0
  ip address 10.12.2.1 255.255.255.252
 !
 interface GigabitEthernet1/2
  description to_core
- nameif inside
+ nameif INSIDE
  security-level 100
  ip address 10.2.2.1 255.255.255.252
 !
 interface GigabitEthernet1/3
  description dmz
- nameif dmz
+ nameif DMZ
  security-level 50
  ip address 192.168.0.1 255.255.255.192
 !
@@ -62,8 +62,14 @@ interface Management1/1
 !
 !
 !
+access-list INSIDE extended permit ip any any
+access-list OUTSIDE extended permit ip any any
+access-list DMZ extended permit ip any any
 !
 !
+access-group INSIDE in interface INSIDE
+access-group OUTSIDE in interface OUTSIDE
+access-group DMZ in interface DMZ
 !
 !
 class-map my_inspection_default
@@ -91,8 +97,10 @@ ssh timeout 5
 router ospf 1
  router-id 192.168.10.22
  log-adjacency-changes
+ area 1 nssa no-summary
  network 10.12.2.0 255.255.255.252 area 1
  network 10.2.2.0 255.255.255.252 area 1
+ network 192.168.10.0 255.255.255.128 area 1
  network 192.168.0.0 255.255.255.192 area 1
 !
 asa2#
