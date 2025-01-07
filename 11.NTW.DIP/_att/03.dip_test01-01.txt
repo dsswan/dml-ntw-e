@@ -1,0 +1,198 @@
+core1#show spanning-tree
+VLAN0001
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    32769
+             Address     0001.6348.1813
+             Cost        19
+             Port        3(FastEthernet0/3)
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
+             Address     0002.4A22.7798
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/1            Desg FWD 19        128.1    P2p
+Fa0/2            Desg FWD 19        128.2    P2p
+Fa0/3            Root FWD 19        128.3    P2p
+Fa0/23           Desg FWD 19        128.23   P2p
+Fa0/24           Desg FWD 19        128.24   P2p
+Po1              Altn BLK 12        128.27   Shr
+
+VLAN0100
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    4196
+             Address     0001.9676.6AE9
+             Cost        12
+             Port        27(Port-channel1)
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    4196  (priority 4096 sys-id-ext 100)
+             Address     0002.4A22.7798
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/1            Desg FWD 19        128.1    P2p
+Fa0/2            Desg FWD 19        128.2    P2p
+Fa0/3            Desg FWD 19        128.3    P2p
+Po1              Root FWD 12        128.27   Shr
+
+VLAN0200
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    4296
+             Address     0001.9676.6AE9
+             Cost        12
+             Port        27(Port-channel1)
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    4296  (priority 4096 sys-id-ext 200)
+             Address     0002.4A22.7798
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/1            Desg FWD 19        128.1    P2p
+Fa0/2            Desg FWD 19        128.2    P2p
+Fa0/3            Desg FWD 19        128.3    P2p
+Po1              Root FWD 12        128.27   Shr
+
+VLAN0300
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    4396
+             Address     0001.9676.6AE9
+             Cost        12
+             Port        27(Port-channel1)
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    4396  (priority 4096 sys-id-ext 300)
+             Address     0002.4A22.7798
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/1            Desg FWD 19        128.1    P2p
+Fa0/2            Desg FWD 19        128.2    P2p
+Fa0/3            Desg FWD 19        128.3    P2p
+Po1              Root FWD 12        128.27   Shr
+
+VLAN0400
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    4496
+             Address     0001.9676.6AE9
+             Cost        12
+             Port        27(Port-channel1)
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    4496  (priority 4096 sys-id-ext 400)
+             Address     0002.4A22.7798
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/1            Desg FWD 19        128.1    P2p
+Fa0/2            Desg FWD 19        128.2    P2p
+Fa0/3            Desg FWD 19        128.3    P2p
+Po1              Root FWD 12        128.27   Shr
+
+VLAN0500
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    4596
+             Address     0001.9676.6AE9
+             Cost        12
+             Port        27(Port-channel1)
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    4596  (priority 4096 sys-id-ext 500)
+             Address     0002.4A22.7798
+             Hello Time  2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  20
+
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/1            Desg FWD 19        128.1    P2p
+Fa0/2            Desg FWD 19        128.2    P2p
+Fa0/3            Desg FWD 19        128.3    P2p
+Po1              Root FWD 12        128.27   Shr
+
+core1#
+
+==================
+core1#show standby
+Vlan100 - Group 100 (version 2)
+  State is Active
+    8 state changes, last state change 00:00:19
+  Virtual IP address is 192.168.10.1
+  Active virtual MAC address is 0000.0C9F.F064
+    Local virtual MAC address is 0000.0C9F.F064 (v2 default)
+  Hello time 3 sec, hold time 10 sec
+    Next hello sent in 0.674 secs
+  Preemption enabled
+  Active router is local
+  Standby router is 192.168.10.3
+  Priority 110 (configured 110)
+    Track interface GigabitEthernet0/1 state Up decrement 10
+  Group name is hsrp-Vl1-100 (default)
+Vlan200 - Group 200 (version 2)
+  State is Active
+    8 state changes, last state change 00:00:19
+  Virtual IP address is 192.168.20.1
+  Active virtual MAC address is 0000.0C9F.F0C8
+    Local virtual MAC address is 0000.0C9F.F0C8 (v2 default)
+  Hello time 3 sec, hold time 10 sec
+    Next hello sent in 1.322 secs
+  Preemption enabled
+  Active router is local
+  Standby router is 192.168.20.3, priority 100 (expires in 7 sec)
+  Priority 110 (configured 110)
+    Track interface GigabitEthernet0/1 state Up decrement 10
+  Group name is hsrp-Vl2-200 (default)
+Vlan300 - Group 300 (version 2)
+  State is Active
+    8 state changes, last state change 00:00:18
+  Virtual IP address is 192.168.30.1
+  Active virtual MAC address is 0000.0C9F.F12C
+    Local virtual MAC address is 0000.0C9F.F12C (v2 default)
+  Hello time 3 sec, hold time 10 sec
+    Next hello sent in 2.559 secs
+  Preemption enabled
+  Active router is local
+  Standby router is 192.168.30.3
+  Priority 110 (configured 110)
+    Track interface GigabitEthernet0/1 state Up decrement 10
+  Group name is hsrp-Vl3-300 (default)
+Vlan400 - Group 400 (version 2)
+  State is Active
+    8 state changes, last state change 00:00:19
+  Virtual IP address is 192.168.40.1
+  Active virtual MAC address is 0000.0C9F.F190
+    Local virtual MAC address is 0000.0C9F.F190 (v2 default)
+  Hello time 3 sec, hold time 10 sec
+    Next hello sent in 1.662 secs
+  Preemption enabled
+  Active router is local
+  Standby router is 192.168.40.3
+  Priority 110 (configured 110)
+    Track interface GigabitEthernet0/1 state Up decrement 10
+  Group name is hsrp-Vl4-400 (default)
+Vlan500 - Group 500 (version 2)
+  State is Active
+    8 state changes, last state change 00:00:18
+  Virtual IP address is 192.168.50.1
+  Active virtual MAC address is 0000.0C9F.F1F4
+    Local virtual MAC address is 0000.0C9F.F1F4 (v2 default)
+  Hello time 3 sec, hold time 10 sec
+    Next hello sent in 1.18 secs
+  Preemption enabled
+  Active router is local
+  Standby router is 192.168.50.3, priority 100 (expires in 7 sec)
+  Priority 110 (configured 110)
+    Track interface GigabitEthernet0/1 state Up decrement 10
+  Group name is hsrp-Vl5-500 (default)
+core1#
