@@ -103,7 +103,7 @@ O*IA 0.0.0.0/0 [110/3] via 10.1.1.1, 00:4294967295:4294967288, GigabitEthernet0/
 
 Должно работать с такими настройками:
 ```
-=== core1 ===
+=== asa1 ===
 
 access-list INSIDE extended permit ip any any
 access-list INSIDE extended permit tcp any any
@@ -117,7 +117,7 @@ access-list OUTSIDE extended permit ip 10.0.0.0 255.0.0.0 any
 access-group INSIDE in interface INSIDE
 access-group OUTSIDE in interface OUTSIDE
 
-=== core2 ===
+=== asa2 ===
 
 access-list INSIDE extended permit ip any any
 access-list INSIDE extended permit tcp any any
